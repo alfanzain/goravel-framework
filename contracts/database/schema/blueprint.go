@@ -75,9 +75,9 @@ type Blueprint interface {
 	// Foreign Create a new unsigned big integer (8-byte) column on the table.
 	ForeignID(column string) ForeignIdColumnDefinition
 	// ForeignUlid Create a new ULID column on the table with a foreign key constraint.
-	ForeignUlid(column string, length ...int) driver.ColumnDefinition
+	ForeignUlid(column string, length ...int) ForeignIdColumnDefinition
 	// ForeignUuid Create a new UUID column on the table with a foreign key constraint.
-	ForeignUuid(column string) driver.ColumnDefinition
+	ForeignUuid(column string) ForeignIdColumnDefinition
 	// FullText Specify a fulltext for the table.
 	FullText(column ...string) IndexDefinition
 	// GetAddedColumns Get the added columns.

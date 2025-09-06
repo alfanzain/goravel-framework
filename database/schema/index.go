@@ -121,10 +121,16 @@ type ForeignIdColumnDefinition struct {
 	blueprint Blueprint
 }
 
-func NewForeignIdColumnDefinition(ttype string, name string) schema.ForeignIdColumnDefinition {
+func NewForeignIdColumnDefinition(ttype string, name string, length ...int) schema.ForeignIdColumnDefinition {
+	var l *int
+	if len(length) > 0 {
+		l = &length[0]
+	}
+
 	cd := ColumnDefinition{
-		name:  &name,
-		ttype: convert.Pointer(ttype),
+		name:   &name,
+		ttype:  convert.Pointer(ttype),
+		length: l,
 	}
 
 	return &ForeignIdColumnDefinition{

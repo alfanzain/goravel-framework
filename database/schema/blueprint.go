@@ -263,17 +263,17 @@ func (r *Blueprint) ForeignID(column string) schema.ForeignIdColumnDefinition {
 	return NewForeignIdColumnDefinition("bigInteger", column)
 }
 
-func (r *Blueprint) ForeignUlid(column string, length ...int) driver.ColumnDefinition {
+func (r *Blueprint) ForeignUlid(column string, length ...int) schema.ForeignIdColumnDefinition {
 	defaultLength := DefaultUlidLength
 	if len(length) > 0 {
 		defaultLength = length[0]
 	}
 
-	return r.Ulid(column, defaultLength)
+	return NewForeignIdColumnDefinition("char", column, defaultLength)
 }
 
-func (r *Blueprint) ForeignUuid(column string) driver.ColumnDefinition {
-	return r.Uuid(column)
+func (r *Blueprint) ForeignUuid(column string) schema.ForeignIdColumnDefinition {
+	return NewForeignIdColumnDefinition("uuid", column)
 }
 
 func (r *Blueprint) FullText(column ...string) schema.IndexDefinition {
