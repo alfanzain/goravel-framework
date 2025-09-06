@@ -118,24 +118,7 @@ func (r *IndexDefinition) Name(name string) schema.IndexDefinition {
 
 type ForeignIdColumnDefinition struct {
 	*ColumnDefinition
-	blueprint Blueprint
-}
-
-func NewForeignIdColumnDefinition(ttype string, name string, length ...int) schema.ForeignIdColumnDefinition {
-	var l *int
-	if len(length) > 0 {
-		l = &length[0]
-	}
-
-	cd := ColumnDefinition{
-		name:   &name,
-		ttype:  convert.Pointer(ttype),
-		length: l,
-	}
-
-	return &ForeignIdColumnDefinition{
-		ColumnDefinition: cd.Unsigned().(*ColumnDefinition),
-	}
+	blueprint *Blueprint
 }
 
 func (r *ForeignIdColumnDefinition) Constrained(table *string, column string) schema.ForeignKeyDefinition {

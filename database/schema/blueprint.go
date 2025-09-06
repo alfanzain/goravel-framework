@@ -260,20 +260,24 @@ func (r *Blueprint) Foreign(column ...string) schema.ForeignKeyDefinition {
 }
 
 func (r *Blueprint) ForeignID(column string) schema.ForeignIdColumnDefinition {
-	return NewForeignIdColumnDefinition("bigInteger", column)
+	return &ForeignIdColumnDefinition{
+		ColumnDefinition: r.UnsignedBigInteger(column).(*ColumnDefinition),
+		blueprint:        r,
+	}
 }
 
 func (r *Blueprint) ForeignUlid(column string, length ...int) schema.ForeignIdColumnDefinition {
-	defaultLength := DefaultUlidLength
-	if len(length) > 0 {
-		defaultLength = length[0]
+	return &ForeignIdColumnDefinition{
+		ColumnDefinition: r.Ulid(column, length...).(*ColumnDefinition),
+		blueprint:        r,
 	}
-
-	return NewForeignIdColumnDefinition("char", column, defaultLength)
 }
 
 func (r *Blueprint) ForeignUuid(column string) schema.ForeignIdColumnDefinition {
-	return NewForeignIdColumnDefinition("uuid", column)
+	return &ForeignIdColumnDefinition{
+		ColumnDefinition: r.Uuid(column).(*ColumnDefinition),
+		blueprint:        r,
+	}
 }
 
 func (r *Blueprint) FullText(column ...string) schema.IndexDefinition {
