@@ -115,6 +115,8 @@ var (
 				Cache,
 				Config,
 				Log,
+				Session,
+				Validation,
 			},
 		},
 		Lang: {
@@ -165,6 +167,7 @@ var (
 			PkgPath: "github.com/goravel/framework/route",
 			Dependencies: []string{
 				Config,
+				Http,
 			},
 		},
 		Schedule: {
@@ -210,6 +213,8 @@ var (
 				Cache,
 				Config,
 				Orm,
+				Route,
+				Session,
 			},
 		},
 		Validation: {
